@@ -1,0 +1,124 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery Mobile Web App</title>
+<link href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="http://code.jquery.com/jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js" type="text/javascript"></script>
+
+</head> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>
+		
+		function delCm(id){
+			 var URLs="comments.php";
+			 var myData = {"id": id};			 
+			  $.ajax({
+                url: URLs,
+                data: JSON.stringify(myData),
+                type:"DELETE",
+                dataType:'text',
+
+                success: function(msg){					
+                    alert(msg);
+					//alert("hihi");
+					location.reload();		
+                }
+			  });
+		}
+$(document).ready(function() {
+	
+	$.getJSON("cm_display.php", function(data){
+		
+	 $.each(data, function(i, row){
+		 //alert("I'm here "+i);
+       $("#holy").append( i +".  "+"Comment: " +"<br>"+ row.cm + "<br>"+" Post by "+ row.username + "   " + "<a href='javascript:void(0)' onClick= 'delCm (\""+ row.cmid + "\")'>Delete</a><br><br>" );
+    })
+		
+		});
+	
+	 // <button id="delbutton" type="delete" (\""+ row.cmid + "\") >Delete</button>
+	
+	
+		$("#submitbtn").click(function() {
+
+		
+		 var URLs="comments.php";
+          
+		    var cm=$("#comment").val();
+
+  		    var name=$("#username").val();
+alert(cm);
+		
+            var myData = "cm="+ cm + "&name=" + name; 
+			alert(myData);
+		//build a post data structure
+
+            $.ajax({
+                url: URLs,
+                data: myData,
+                type:"POST",
+                dataType:'text',
+
+                success: function(msg){
+                    alert(msg);
+		$("#showmsg").html("you got "+ msg + " records.");
+                },
+
+                 error:function(xhr, ajaxOptions, thrownError){
+                    alert(xhr.status);
+                    alert(thrownError);
+                 location.reload();
+				 }
+            });
+   
+	});
+
+});
+       
+        </script>
+        
+        
+      
+        
+        
+        
+<body> 
+
+<div data-role="page" id="page">
+	<div data-role="header"data-add-back-btn="true" data-back-btn-text="Back">
+     <a data-rel="back">Back</a>
+		<h1>comments</h1>
+	</div>
+    	<div data-role="content">
+	  
+	    <p>
+	      <label for="comment">Add Comment:</label>
+	    </p>
+	    <p>
+	      <input type="text" name="comment" id="comment">
+	    </p>
+        <p>
+        <label for="username">Your name:</label>   
+       </p>
+        <p>
+         <input type="text" name="username" id="username">
+        </p>
+        
+	    <p>
+	      <input type="submit" name="comments_submit" id="submitbtn" value="Submit">
+	    </p>
+	    <p> 
+        <div id="holy">
+ 		 </div>
+</p>
+    </div>
+    
+	<div data-role="footer">
+		<h4>&nbsp;</h4>
+	</div>
+</div>
+
+</body>
+</html>

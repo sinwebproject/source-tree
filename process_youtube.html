@@ -1,0 +1,22 @@
+<div id="player"></div>
+<script>
+var player;
+var videos = ['2G-yUuiqIZ0'];
+(function() {
+ if (videos.length) {
+  var tag = document.createElement('script');
+  tag.onload = function() {
+   YT.ready(function() {
+    player = new YT.Player('player', {
+     playerVars: {
+      playlist: videos.join(","),
+     }
+    });
+   });
+  }
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+ }
+})();
+</script>

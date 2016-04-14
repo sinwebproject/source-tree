@@ -1,0 +1,82 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery Mobile Web App</title>
+<link href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="http://code.jquery.com/jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js" type="text/javascript"></script>
+</head> 
+
+
+<script>
+
+        $(document).ready(function() {
+			$("#addFavourite").click(function() {
+			
+			    var URLs="favlist.php";
+          		var currentlink = window.location.pathname;
+				//alert (currentlink);
+		var myData = "currentlink=" + currentlink; 
+         	  //alert (myData);
+			 	$.ajax({
+                	url: URLs,
+                	data: myData,
+					type:"POST",
+					dataType:'text',
+
+               		success: function(msg){
+					//alert(msg);
+					if (msg=='1')
+					{
+						alert("success add favorite list ");
+              	  	}else{
+						alert("This page added favorite list");
+						location.reload();
+						}
+					},
+
+              	 	error:function(xhr, ajaxOptions, thrownError){
+                 	   alert(xhr.status);
+               	 	   alert(thrownError);
+              	   }
+         	  	 });
+			
+			});
+		});
+		
+</script>
+
+
+
+
+<body> 
+
+<div data-role="page" id="page">
+	<div data-role="header" data-add-back-btn="true" data-back-btn-text="Back">
+     <a data-rel="back">Back</a>
+		<h2><span id="Controversies">Controversies</span>	</h2>
+	</div>
+	<div data-role="content">
+	  <p>The genetically modified foods controversy consists of a set of disputes over the use of food made from genetically modified crops. The disputes involve consumers, farmers, biotechnology companies, governmental regulators, non-governmental organizations, environmental and political activists and scientists. The major disagreements include whether GM foods can be safely consumed, harm the environment and/or are adequately tested and regulated. The objectivity of scientific research and publications has been challenged. Farming-related disputes include the use and impact of pesticides, seed production and use, side effects on non-GMO crops/farms, and potential control of the GM food supply by seed companies.</p>
+	  <p>The conflicts have continued since GM foods were invented. They have occupied the media, the courts, local, regional and national governments and international organizations.</p>
+	</div>
+	<div data-role="content">	
+  <iframe src="controversies_youtube.html" height="370px" width="670px"></iframe>
+  <p></p>
+  
+		<ul data-role="listview">
+			<li><a href="cm" rel="external">Add comments</a></li>
+            <li><a href="#page2" id="addFavourite">Add favorite list</a></li>
+		</ul>		
+	</div>
+</p>
+    
+	<div data-role="footer">
+		<h4>&nbsp;</h4>
+	</div>
+</div>
+
+
+</body>
+</html>

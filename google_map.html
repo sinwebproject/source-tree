@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Save a Place</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Custom Save Widget</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 100%;
+      }
+      #save-widget {
+        width: 300px;
+        box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px;
+        background-color: white;
+        padding: 10px;
+        font-family: Roboto, Arial;
+        font-size: 13px;
+        margin: 15px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="save-widget">
+      <strong>World Health Organization Avenue Appia 20</strong>
+      <p>The <strong>World Health Organization</strong> (<strong>WHO</strong>) is a specialized agency of the United Nations</a> that is concerned with international public health.</p>
+    </div>
+    <script>
+/*
+ * This sample uses a custom control to display the SaveWidget. Custom
+ * controls can be used in place of the default Info Window to create a
+ * custom UI.
+ * This sample uses a Place ID to reference Google Sydney. Place IDs are
+ * stable values that uniquely reference a place on a Google Map and are
+ * documented in detail at:
+ * https://developers.google.com/maps/documentation/javascript/places#placeid
+ */
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 15,
+    center: {lat: 46.233343, lng: 6.129647},
+    mapTypeControlOptions: {
+      mapTypeIds: [
+        google.maps.MapTypeId.ROADMAP,
+        google.maps.MapTypeId.SATELLITE
+      ],
+      position: google.maps.ControlPosition.BOTTOM_LEFT
+    }
+  });
+
+  var widgetDiv = document.getElementById('save-widget');
+  map.controls[google.maps.ControlPosition.TOP_LEFT].push(widgetDiv);
+
+  // Append a Save Control to the existing save-widget div.
+  var saveWidget = new google.maps.SaveWidget(widgetDiv, {
+    place: {
+      // ChIJN1t_tDeuEmsRUsoyG83frY4 is the place Id for Google Sydney.
+      placeId: 'ChIJzciWPvdkjEcRMKWirTsUjkM',
+      location: {lat: 46.233343, lng: 6.129647}
+    },
+    attribution: {
+      source: 'Google Maps JavaScript API',
+      webUrl: 'https://developers.google.com/maps/'
+    }
+  });
+
+  var marker = new google.maps.Marker({
+    map: map,
+    position: saveWidget.getPlace().location
+  });
+}
+
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb99e6tBJSkVbG0hahFnJEDFATXsglmIc&callback=initMap&signed_in=true" async defer>
+    </script>
+  </body>
+</html>

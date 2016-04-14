@@ -1,0 +1,82 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery Mobile Web App</title>
+<link href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="http://code.jquery.com/jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js" type="text/javascript"></script>
+
+
+jquery-ui.structure.min
+</head> 
+
+
+<script>
+
+        $(document).ready(function() {
+			$("#addFavourite").click(function() {
+			
+			    var URLs="favlist.php";
+          		var currentlink = window.location.pathname;
+				//alert (currentlink);
+		var myData = "currentlink=" + currentlink; 
+         	  //alert (myData);
+			 	$.ajax({
+                	url: URLs,
+                	data: myData,
+					type:"POST",
+					dataType:'text',
+
+               		success: function(msg){
+					//alert(msg);
+					if (msg=='1')
+					{
+						alert("success add favorite list ");
+              	  	}else{
+						alert("This page added favorite list");
+						location.reload();
+						}
+					},
+
+              	 	error:function(xhr, ajaxOptions, thrownError){
+                 	   alert(xhr.status);
+               	 	   alert(thrownError);
+              	   }
+         	  	 });
+			
+			});
+		});
+		
+</script>
+
+
+
+<body> 
+
+<div data-role="page" id="page">
+	<div data-role="header"data-add-back-btn="true" data-back-btn-text="Back">
+     <a data-rel="back">Back</a>
+		<h1>Genetically modified food</h1>
+	</div>
+	<div data-role="content">
+	  <p><strong>Genetically modified foods</strong> or <strong>GM foods</strong>, also <strong>genetically engineered foods</strong>, are foods produced from organisms that have had changes introduced into their DNA using the methods of genetic engineering. Genetic engineering techniques allow for the introduction of new traits as well as greater control over traits than previous methods such as selective breeding and mutation breeding.</p>
+	  <p>Commercial sale of genetically modified foods began in 1994, when Calgene first marketed its unsuccessful Flavr Savr delayed-ripening tomato. Most food modifications have primarily focused on cash crops in high demand by farmers such as soybean, corn, canola, and cotton seed oil. Genetically modified crops have been engineered for resistance to pathogens and herbicides and for better nutrient profiles. GM livestock have been developed, although as of November 2013 none were on the market.</p>
+	  <p>There is general scientific agreement that food from genetically modified crops is not inherently riskier to human health than conventional food, but should be tested on a case-by-case basis. However, there are ongoing public concerns related to food safety, regulation, labelling, environmental impact, research methods, and the fact that some GM seeds are subject to intellectual property rights owned by corporations.</p><div data-role="content">	
+<iframe src="background_youtube.html" height="370px" width="670px"></iframe>
+  <p></p>
+		<ul data-role="listview">
+			<li><a href="cm" rel="external">Add comments</a></li>
+            <li><a href="#page2" id="addFavourite">Add favorite list</a></li>
+		</ul>		
+	</div>
+</p>
+    </div>
+	<div data-role="footer">
+		<h4>&nbsp;</h4>
+	</div>
+</div>
+
+
+</body>
+</html>

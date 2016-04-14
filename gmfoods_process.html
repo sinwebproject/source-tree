@@ -1,0 +1,80 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery Mobile Web App</title>
+<link href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" rel="stylesheet" type="text/css"/>
+<script src="http://code.jquery.com/jquery-1.6.4.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js" type="text/javascript"></script>
+</head> 
+
+
+<script>
+
+        $(document).ready(function() {
+			$("#addFavourite").click(function() {
+			
+			    var URLs="favlist.php";
+          		var currentlink = window.location.pathname;
+				//alert (currentlink);
+		var myData = "currentlink=" + currentlink; 
+         	  //alert (myData);
+			 	$.ajax({
+                	url: URLs,
+                	data: myData,
+					type:"POST",
+					dataType:'text',
+
+               		success: function(msg){
+					//alert(msg);
+					if (msg=='1')
+					{
+						alert("success add favorite list ");
+              	  	}else{
+						alert("This page added favorite list");
+						location.reload();
+						}
+					},
+
+              	 	error:function(xhr, ajaxOptions, thrownError){
+                 	   alert(xhr.status);
+               	 	   alert(thrownError);
+              	   }
+         	  	 });
+			
+			});
+		});
+		
+</script>
+
+
+
+<body> 
+
+<div data-role="page" id="page">
+	<div data-role="header" data-add-back-btn="true" data-back-btn-text="Back">
+     <a data-rel="back">Back</a>
+		<h2><span id="Process">Process</span>	</h2>
+	</div>
+	<div data-role="content">
+	  <p>Genetically engineered organisms are generated and tested in the laboratory for desired qualities. The most common modification is to add one or more genes to an organism's genome. Less commonly, genes are removed or their expression is increased or silenced or the number of copies of a gene is increased or decreased.</p>
+	  <p>Once satisfactory strains are produced, the producer applies for regulatory approval to field-test them, called a "field release." Field-testing involves cultivating the plants on farm fields or growing animals in a controlled environment. If these field tests are successful, the producer applies for regulatory approval to grow and market the crop. Once approved, specimens (seeds, cuttings, breeding pairs, etc.) are cultivated and sold to farmers. The farmers cultivate and market the new strain. In some cases, the approval covers marketing but not cultivation.</p>
+	  <p>According to the USDA, the number of field releases for genetically engineered organisms has grown from four in 1985 to an average of about 800 per year. Cumulatively, more than 17,000 releases had been approved through September 2013.	  </p>
+	  <div data-role="content">
+  <iframe src="process_youtube.html" height="370px" width="670px"></iframe>
+  <p></p>	
+		<ul data-role="listview">
+			<li><a href="cm" rel="external">Add comments</a></li>
+            <li><a href="#page2" id="addFavourite">Add favorite list</a></li>
+		</ul>		
+	</div>
+</p>
+    </div>
+	<div data-role="footer">
+		<h4>&nbsp;</h4>
+	</div>
+</div>
+
+
+</body>
+</html>
